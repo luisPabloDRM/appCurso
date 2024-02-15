@@ -1,19 +1,38 @@
-import { Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { Recipe } from '../models/recipe';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
-  imports: [RecipeItemComponent],
+  imports: [RecipeItemComponent, CommonModule],
   templateUrl: './recipe-list.component.html',
-  styleUrl: './recipe-list.component.css'
+  styleUrl: './recipe-list.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipeListComponent {
-  recipes: Recipe[] = [];
+  @Input()
+  recipes: Recipe[] = [
+    {
+      name: 'Braciole',
+      description:
+        'This cozy dish of rolled meat stuffed with breadcrumbs and cheese and cooked in tomato sauce is a staple at Italian family gatherings.',
+      imagePath:
+        'https://www.foodandwine.com/thmb/dX7pNh_WX83ESqb9VJuvkBwVKwM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Braciole-FT-RECIPE1122-66acf49cef0e4390bec780945709e7f3.jpg',
+    },
+    {
+      name: 'Chicken Parmesan',
+      description:
+        'This classic Italian-American dish is a family favorite. The chicken is breaded, browned, then baked with a rich tomato sauce and topped with mozzarella.',
+      imagePath:'https://thecozycook.com/wp-content/uploads/2022/08/Chicken-Parmesan-Recipe-1.jpg',
+    },
+  ];
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  constructor() {}
 }

@@ -8,8 +8,8 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
   standalone: true,
   imports: [CommonModule, RecipeDetailComponent, RecipeListComponent],
   templateUrl: './recipe-book.component.html',
-  styleUrl: './recipe-book.component.css'
+  styleUrl: './recipe-book.component.css',
 })
 export class RecipeBookComponent {
-
+  constructor() {}
 }
