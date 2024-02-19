@@ -23,5 +23,11 @@ import { RecipeListComponent } from './recipe-book/recipe-list/recipe-list.compo
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'app_Prueba';
+  title = 'RecipeApp';
+
+  loadedFeature = 'recipe';
+  
+  onNavigate(feature:string){
+    this.loadedFeature = feature;
+  }
 }
