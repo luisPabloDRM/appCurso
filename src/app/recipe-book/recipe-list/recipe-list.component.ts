@@ -2,11 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit
+  OnInit,
+  Output
 } from '@angular/core';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { Recipe } from '../models/recipe';
 import { CommonModule } from '@angular/common';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-list',
@@ -17,6 +19,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipeListComponent {
+  @Output() recipeWasSelected = new EventEmitter<Recipe>();
   @Input()
   recipes: Recipe[] = [
     {
@@ -30,9 +33,14 @@ export class RecipeListComponent {
       name: 'Chicken Parmesan',
       description:
         'This classic Italian-American dish is a family favorite. The chicken is breaded, browned, then baked with a rich tomato sauce and topped with mozzarella.',
-      imagePath:'https://thecozycook.com/wp-content/uploads/2022/08/Chicken-Parmesan-Recipe-1.jpg',
+      imagePath:
+        'https://thecozycook.com/wp-content/uploads/2022/08/Chicken-Parmesan-Recipe-1.jpg',
     },
   ];
 
   constructor() {}
+
+  onRecipeSelected(recipe: Recipe) {
+    this.recipeWasSelected.emit(recipe)
+  }
 }
