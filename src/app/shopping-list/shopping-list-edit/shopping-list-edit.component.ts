@@ -16,14 +16,19 @@ import { Ingredient } from '../../recipe-book/models/ingredient';
   styleUrl: './shopping-list-edit.component.css',
 })
 export class ShoppingListEditComponent {
-  @ViewChild('nameInput', { static: true }) nameInputRef:| ElementRef | undefined;
-  @ViewChild('amountInput', { static: true }) amountInputRef:| ElementRef | undefined;
+  @ViewChild('nameInput', { static: true }) nameInputRef:
+    | ElementRef
+    | undefined;
+  @ViewChild('amountInput', { static: true }) amountInputRef:
+    | ElementRef
+    | undefined;
 
-  ingredientAdded = new EventEmitter<Ingredient>();
+  @Output() ingredientAdded = new EventEmitter<Ingredient>();
 
   constructor() {}
 
-  addIngredients() {
+  addIngredients(event : Event) {
+    event.preventDefault()
     const ingName = this.nameInputRef!.nativeElement.value;
     const ingAmount = this.amountInputRef!.nativeElement.value;
     const newIngredient: Ingredient = { name: ingName, amount: ingAmount };
