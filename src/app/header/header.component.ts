@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, NgModule, Output } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [SharedModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -14,5 +15,6 @@ export class HeaderComponent {
     this,this.featureSelected.emit(feature)
 
   }
+  
 
 }
