@@ -1,10 +1,11 @@
 import { Component, EventEmitter, NgModule, Output } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
