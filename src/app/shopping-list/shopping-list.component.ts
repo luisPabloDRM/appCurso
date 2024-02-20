@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ShoppingListEditComponent } from './shopping-list-edit/shopping-list-edit.component';
 import { Ingredient } from '../recipe-book/models/ingredient';
 import { CommonModule } from '@angular/common';
+import { ShoppingListService } from './service/shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
@@ -9,16 +10,21 @@ import { CommonModule } from '@angular/common';
   imports: [ShoppingListEditComponent, CommonModule],
   templateUrl: './shopping-list.component.html',
   styleUrl: './shopping-list.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingListComponent {
-  ingredients: Ingredient[] = [
-    { name: 'Apples', amount: 5 },
-    { name: 'Tomatoes', amount: 10 },
-  ];
+  ingredients: Ingredient[] = [];
 
-  onIngredientAdded(ingredient: Ingredient){
-    this.ingredients.push(ingredient);
+  constructor(private shoppingListService: ShoppingListService) {}
+
+  ngOnInit() {
+    this.ingredients = this.shoppingListService.getIngredients();
+    this.shoppingListService.ingredientsChanged.subscribe(
+      ( ingredients: Ingredient[])=>{
+        this.ingredients = ingredients;
+      }
+    );
   }
+
 
 }
