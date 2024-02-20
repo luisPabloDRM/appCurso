@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Inject,
   Input,
   OnInit,
   Output
@@ -9,6 +10,7 @@ import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { Recipe } from '../models/recipe';
 import { CommonModule } from '@angular/common';
 import { EventEmitter } from '@angular/core';
+import { RecipeService } from '../services/recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -19,28 +21,15 @@ import { EventEmitter } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipeListComponent {
-  @Output() recipeWasSelected = new EventEmitter<Recipe>();
-  @Input()
-  recipes: Recipe[] = [
-    {
-      name: 'Braciole',
-      description:
-        'This cozy dish of rolled meat stuffed with breadcrumbs and cheese and cooked in tomato sauce is a staple at Italian family gatherings.',
-      imagePath:
-        'https://www.foodandwine.com/thmb/dX7pNh_WX83ESqb9VJuvkBwVKwM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Braciole-FT-RECIPE1122-66acf49cef0e4390bec780945709e7f3.jpg',
-    },
-    {
-      name: 'Chicken Parmesan',
-      description:
-        'This classic Italian-American dish is a family favorite. The chicken is breaded, browned, then baked with a rich tomato sauce and topped with mozzarella.',
-      imagePath:
-        'https://thecozycook.com/wp-content/uploads/2022/08/Chicken-Parmesan-Recipe-1.jpg',
-    },
-  ];
+  // He quitado el array de recetas del componente, lo he pasado al servicio, y aqui solo lo declaro con su tipado
+  recipes: Recipe[] = []
+  
 
-  constructor() {}
+  constructor(private recipeService: RecipeService) {}
 
-  onRecipeSelected(recipe: Recipe) {
-    this.recipeWasSelected.emit(recipe)
+  // En el OnInit, con el this.recipes = ... lo que hago es asignarle un nuevo valor,
+  // que en este caso es el método que hemos declarado en el servicio 
+  ngOnInit(){
+    this.recipes = this.recipeService.getRecipes()
   }
 }
