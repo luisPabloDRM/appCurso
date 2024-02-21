@@ -17,6 +17,5 @@ export const routes: Routes = [
     {
         path :'recipes',
         component: RecipeBookComponent
-    },
-
-];
+    }
+]

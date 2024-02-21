@@ -3,7 +3,6 @@ import { Recipe } from '../models/recipe';
 import { Ingredient } from '../models/ingredient';
 import { ShoppingListService } from '../../shopping-list/service/shopping-list.service';
 
-
 @Injectable()
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
@@ -39,19 +38,19 @@ export class RecipeService {
         },
         {
           name: 'Meat',
-          amount: 2  ,
+          amount: 2,
         },
       ],
     },
   ];
-  
-  constructor(private shoppingListService : ShoppingListService ){}
+
+  constructor(private shoppingListService: ShoppingListService) {}
 
   getRecipes() {
     return this.recipes.slice();
   }
 
-  addIngredientToShoppingList(ingredients: Ingredient[]){
+  addIngredientToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
   }
 }

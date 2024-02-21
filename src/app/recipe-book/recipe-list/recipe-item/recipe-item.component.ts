@@ -16,7 +16,8 @@ export class RecipeItemComponent {
 
   constructor(private recipeService: RecipeService){ }
 
-  onSelected(){
+  onSelected(event: Event){
+    event.preventDefault()
     this.recipeService.recipeSelected.emit(this.recipe)
   }
 }
