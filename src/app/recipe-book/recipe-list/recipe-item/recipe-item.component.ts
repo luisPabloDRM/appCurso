@@ -11,4 +11,8 @@ import { Recipe } from '../../models/recipe';
 })
 export class RecipeItemComponent {
   @Input() recipe!: Recipe;
+  @Input() index!: number;
+
+
+  OnInit(): void {}
 }
