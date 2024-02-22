@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Recipe } from '../../models/recipe';
-import { RecipeService } from '../../services/recipe.service';
-
 
 @Component({
   selector: 'app-recipe-item',
@@ -12,12 +10,5 @@ import { RecipeService } from '../../services/recipe.service';
   styleUrl: './recipe-item.component.css',
 })
 export class RecipeItemComponent {
-  @Input()  recipe!: Recipe;
-
-  constructor(private recipeService: RecipeService){ }
-
-  onSelected(event: Event){
-    event.preventDefault()
-    this.recipeService.recipeSelected.emit(this.recipe)
-  }
+  @Input() recipe!: Recipe;
 }

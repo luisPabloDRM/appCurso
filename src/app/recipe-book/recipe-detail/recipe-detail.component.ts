@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Recipe } from '../models/recipe';
 import { CommonModule } from '@angular/common';
 import { RecipeService } from '../services/recipe.service';
 import { DropdownDirective } from '../../shared/dropdown.directive';
+import { ActivatedRoute , Params} from '@angular/router';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -12,13 +13,22 @@ import { DropdownDirective } from '../../shared/dropdown.directive';
   styleUrl: './recipe-detail.component.css',
 })
 export class RecipeDetailComponent {
-  @Input() recipe!: Recipe;
+  recipe!: Recipe;
+  id!:number;
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(
+    private recipeService: RecipeService,
+    private route : ActivatedRoute
+    ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params : Params)=> {
+      this.id = +params['id']
+    })
+  }
 
-  onAddToShoppingList() {
+  onAddToShoppingList(): void {
     this.recipeService.addIngredientToShoppingList(this.recipe.ingredients);
   }
+
 }
