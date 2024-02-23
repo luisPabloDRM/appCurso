@@ -1,25 +1,25 @@
-import { EventEmitter } from "@angular/core";
-import { Ingredient } from "../../recipe-book/models/ingredient"; 
+import { Subject } from 'rxjs';
+import { Ingredient } from '../../recipe-book/models/ingredient';
 
 export class ShoppingListService {
-    ingredientsChanged = new EventEmitter<Ingredient[]>();
+  ingredientsChanged = new Subject<Ingredient[]>();
 
- private ingredients: Ingredient[] = [
+  private ingredients: Ingredient[] = [
     { name: 'Apples', amount: 5 },
     { name: 'Tomatoes', amount: 10 },
   ];
 
-  getIngredients (){
+  getIngredients() {
     return this.ingredients.slice();
   }
 
-  addIngredient(ingredient: Ingredient){
-    this.ingredients.push( ingredient );
-    this.ingredientsChanged.emit(this.ingredients.slice());
+  addIngredient(ingredient: Ingredient) {
+    this.ingredients.push(ingredient);
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  addIngredients(ingredients: Ingredient[]){
-    this.ingredients.push(...ingredients)
-    this.ingredientsChanged.emit(this.ingredients.slice())
+  addIngredients(ingredients: Ingredient[]) {
+    this.ingredients.push(...ingredients);
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 }

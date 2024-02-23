@@ -25,11 +25,4 @@ import { ShoppingListService } from './shopping-list/service/shopping-list.servi
   providers:[ ShoppingListService],
 })
 export class AppComponent {
-  title = 'RecipeApp';
-
-  loadedFeature = 'recipe';
-
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
-  }
 }

@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
-import { Recipe } from './models/recipe';
 import { RecipeService } from './services/recipe.service';
-import { Router } from 'express';
 import { RouterOutlet } from '@angular/router';
 
 
@@ -17,14 +15,8 @@ import { RouterOutlet } from '@angular/router';
   providers: [RecipeService]
 })
 export class RecipeBookComponent {
-  selectedRecipe: Recipe | undefined;
-  constructor( private recipeService : RecipeService ) {}
+  constructor() {}
 
   ngOnInit(){
-    this.recipeService.recipeSelected.subscribe(
-      (recipe: Recipe) => {
-        this.selectedRecipe = recipe
-      }
-    );
   }
 }
