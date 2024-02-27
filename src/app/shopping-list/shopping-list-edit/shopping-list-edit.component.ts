@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { Ingredient } from '../../recipe-book/models/ingredient';
 import { ShoppingListService } from '../service/shopping-list.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { log } from 'console';
 
 @Component({
@@ -25,7 +25,7 @@ export class ShoppingListEditComponent {
   addIngredients() {
     const ingName = this.recipeForm.value.name
     const ingAmount = this.recipeForm.value.amount
-    const newIngredient: Ingredient = { name : ingName , amount:ingAmount };
+    const newIngredient: Ingredient = { name : ingName , amount : ingAmount };
     this.shoppingListService.addIngredient(newIngredient);
   }
 }
