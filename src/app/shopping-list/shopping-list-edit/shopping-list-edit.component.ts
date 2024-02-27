@@ -3,11 +3,12 @@ import { Ingredient } from '../../recipe-book/models/ingredient';
 import { ShoppingListService } from '../service/shopping-list.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-shopping-list-edit',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './shopping-list-edit.component.html',
   styleUrl: './shopping-list-edit.component.css',
 })

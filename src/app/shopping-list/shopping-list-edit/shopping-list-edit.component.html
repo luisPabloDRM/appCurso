@@ -29,7 +29,7 @@
           <button class="btn btn-success" (click)="addIngredients()" [disabled]="!recipeForm.valid" >
             {{editMode ? 'Update' : 'Add'  }}
           </button>
-          <button class="btn btn-danger" type="button" (click)="onDelete()" >Delete</button>
+          <button class="btn btn-danger" type="button" *ngIf="editMode" (click)="onDelete()" >Delete</button>
           <button class="btn btn-primary" type="button" (click)="onClearForm()" >Clear</button>
         </div>
       </div>
