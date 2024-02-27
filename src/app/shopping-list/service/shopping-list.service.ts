@@ -3,7 +3,7 @@ import { Ingredient } from '../../recipe-book/models/ingredient';
 
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
-
+  public startedEditing = new Subject<number>();
   private ingredients: Ingredient[] = [
     { name: 'Apples', amount: 5 },
     { name: 'Tomatoes', amount: 10 },
@@ -11,6 +11,10 @@ export class ShoppingListService {
 
   getIngredients() {
     return this.ingredients.slice();
+  }
+
+  getIngredient(index : number){
+    return this.ingredients[index]
   }
 
   addIngredient(ingredient: Ingredient) {
