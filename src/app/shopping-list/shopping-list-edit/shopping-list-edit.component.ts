@@ -1,39 +1,31 @@
 import {
   Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
+
 } from '@angular/core';
 import { Ingredient } from '../../recipe-book/models/ingredient';
 import { ShoppingListService } from '../service/shopping-list.service';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { log } from 'console';
 
 @Component({
   selector: 'app-shopping-list-edit',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './shopping-list-edit.component.html',
   styleUrl: './shopping-list-edit.component.css',
 })
 export class ShoppingListEditComponent {
-  @ViewChild('nameInput', { static: true }) nameInputRef:
-    | ElementRef
-    | undefined;
-  @ViewChild('amountInput', { static: true }) amountInputRef:
-    | ElementRef
-    | undefined;
+  protected recipeForm = new FormGroup({
+    name: new FormControl(),
+    amount: new FormControl(),
+  });
 
-  
+  constructor(private shoppingListService: ShoppingListService) {}
 
-  constructor(private shoppingListService : ShoppingListService) {}
-
-  addIngredients(event : Event) {
-    event.preventDefault()
-    const ingName = this.nameInputRef!.nativeElement.value;
-    const ingAmount = this.amountInputRef!.nativeElement.value;
-    const newIngredient: Ingredient = { name: ingName, amount: ingAmount };
-    this.shoppingListService.addIngredient(newIngredient)
-   
+  addIngredients() {
+    const ingName = this.recipeForm.value.name
+    const ingAmount = this.recipeForm.value.amount
+    const newIngredient: Ingredient = { name : ingName , amount:ingAmount };
+    this.shoppingListService.addIngredient(newIngredient);
   }
 }

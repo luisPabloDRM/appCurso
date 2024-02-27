@@ -1,4 +1,4 @@
 export type Ingredient = {
-    name : string;
-    amount: number;
+    name : string | null;
+    amount: number | null;
 }
