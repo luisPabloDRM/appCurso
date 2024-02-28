@@ -1,13 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { Recipe } from '../models/recipe';
 import { CommonModule } from '@angular/common';
 import { EventEmitter } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { startWith } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-recipe-list',
@@ -15,25 +15,22 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [RecipeItemComponent, CommonModule],
   templateUrl: './recipe-list.component.html',
   styleUrl: './recipe-list.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipeListComponent {
   // He quitado el array de recetas del componente, lo he pasado al servicio, y aqui solo lo declaro con su tipado
-  recipes: Recipe[] = [];
+  recipes = this.recipeService.recipesChanged.pipe(
+    takeUntilDestroyed(),
+    startWith(this.recipeService.getRecipes())
+  );
 
   constructor(
     private recipeService: RecipeService,
     private router: Router,
-    private route : ActivatedRoute,
-    ) {}
+    private route: ActivatedRoute
+  ) {}
 
-  // En el OnInit, con el this.recipes = ... lo que hago es asignarle un nuevo valor,
-  // que en este caso es el método que hemos declarado en el servicio
-  ngOnInit() {
-    this.recipes = this.recipeService.getRecipes();
-  }
-
-  onNewRecipe(){
-    this.router.navigate(['new'], {relativeTo: this.route})
+  onNewRecipe() {
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 }

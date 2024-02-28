@@ -16,5 +16,5 @@ export class RecipeItemComponent {
   @Input() index!: number;
 
 
-  OnInit(): void {}
+  ngOnInit(): void {}
 }

@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RecipeService } from '../services/recipe.service';
+import { Recipe } from '../models/recipe';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -30,19 +37,22 @@ export class RecipeEditComponent {
   }
 
   onSubmit() {
-    console.log(this.newRecipe);
+    const recipe: Recipe = this.newRecipe.getRawValue();
+
+    if (this.editMode) {
+      this.recipeService.updateRecipe(this.id, recipe);
+    } else {
+      this.recipeService.addRecipe(recipe);
+    }
   }
 
-  onAddIngredient(){
+  onAddIngredient() {
     (<FormArray>this.newRecipe.get('ingredients')).push(
       new FormGroup({
-        'name' : new FormControl(null, Validators.required),
-        'amount': new FormControl(null,[
-                Validators.required,
-                Validators.pattern(/^[1-9] + [0-9]*$/),
-              ])
+        name: new FormControl(null, Validators.required),
+        amount: new FormControl(null, [Validators.required]),
       })
-    )
+    );
   }
 
   private initForm() {
@@ -61,10 +71,7 @@ export class RecipeEditComponent {
           recipeIngredients.push(
             new FormGroup({
               name: new FormControl(ingredient.name, Validators.required),
-              amount: new FormControl(ingredient.amount, [
-                Validators.required,
-                Validators.pattern(/^[1-9]\d*$/),
-              ]),
+              amount: new FormControl(ingredient.amount),
             })
           );
         }
