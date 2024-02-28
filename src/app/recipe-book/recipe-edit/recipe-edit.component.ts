@@ -27,7 +27,6 @@ export class RecipeEditComponent {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router
-
   ) {}
 
   ngOnInit() {
@@ -46,10 +45,10 @@ export class RecipeEditComponent {
     } else {
       this.recipeService.addRecipe(recipe);
     }
-     this.router.navigate(['../'], { relativeTo: this.route });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  OnClearForm(){
+  OnClearForm() {
     this.newRecipe.reset();
   }
 
@@ -60,6 +59,10 @@ export class RecipeEditComponent {
         amount: new FormControl(null, [Validators.required]),
       })
     );
+  }
+
+  OnDeleteIngredient(index : number){
+    (<FormArray>this.newRecipe.get('ingredients')).removeAt(index);
   }
 
   private initForm() {
