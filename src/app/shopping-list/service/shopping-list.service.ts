@@ -1,6 +1,10 @@
 import { Subject } from 'rxjs';
 import { Ingredient } from '../../recipe-book/models/ingredient';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
 
@@ -11,10 +15,10 @@ export class ShoppingListService {
     { name: 'Tomatoes', amount: 10 },
   ];
 
-  getIngredient(index : number){
-    return this.ingredients[index]
+  getIngredient(index: number) {
+    return this.ingredients[index];
   }
-  
+
   getIngredients() {
     return this.ingredients.slice();
   }
@@ -29,14 +33,13 @@ export class ShoppingListService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  updateIngredient(index : number , newIngredient : Ingredient){
+  updateIngredient(index: number, newIngredient: Ingredient) {
     this.ingredients[index] = newIngredient;
-    this.ingredientsChanged.next(this.ingredients.slice())
-
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  deleteIngredients( index: number ){
-    this.ingredients.splice(index, 1)
-    this.ingredientsChanged.next(this.ingredients.slice())
+  deleteIngredients(index: number) {
+    this.ingredients.splice(index, 1);
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 }

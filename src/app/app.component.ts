@@ -6,8 +6,6 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeBookComponent } from './recipe-book/recipe-book.component';
 import { RecipeDetailComponent } from './recipe-book/recipe-detail/recipe-detail.component';
 import { RecipeListComponent } from './recipe-book/recipe-list/recipe-list.component';
-import { ShoppingListService } from './shopping-list/service/shopping-list.service';
-import { RecipeService } from './recipe-book/services/recipe.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +21,5 @@ import { RecipeService } from './recipe-book/services/recipe.service';
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers:[ ShoppingListService, RecipeService],
 })
-export class AppComponent {
-}
+export class AppComponent {}
