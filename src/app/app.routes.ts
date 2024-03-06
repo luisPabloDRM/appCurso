@@ -6,6 +6,7 @@ import { RecipeStartComponent } from './recipe-book/recipe-start/recipe-start.co
 import { RecipeDetailComponent } from './recipe-book/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.component';
 import { recipeFetchDataResolve } from './recipe-book/services/recipe.resolver';
+import { AuthComponent } from './auth/auth.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,4 +21,5 @@ export const routes: Routes = [
     ],
   },
   { path: 'shoppingList', component: ShoppingListComponent },
+  { path: 'auth', component: AuthComponent },
 ];
