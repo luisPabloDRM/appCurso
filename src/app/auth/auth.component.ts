@@ -4,6 +4,8 @@ import { AuthService } from './auth.service';
 import { error } from 'console';
 import { LoadingSpinner } from '../shared/loading-spinner/loading-spinner';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { AuthResponseData } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -15,10 +17,9 @@ import { CommonModule } from '@angular/common';
 export class AuthComponent {
   isLoginMode = true;
   isLoading = false;
-  error! :string;
+  error!: string;
 
-  constructor( private authService : AuthService){}
-
+  constructor(private authService: AuthService) {}
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -30,23 +31,27 @@ export class AuthComponent {
     }
     const email = form.value.email;
     const password = form.value.password;
+    let authObs: Observable<AuthResponseData>
 
     this.isLoading = true;
-    if( this.isLoginMode){
-      //...
-    }else {
-        this.authService.signUp(email, password).subscribe(
-          resData => {
-            console.log(resData)
-            this.isLoading = false;
-        }, 
-          error => {
-            console.error(error);
-            this.isLoading = false;
-            this.error = 'An error ocurred!'
-        }
-      );
+
+    if (this.isLoginMode) {
+      authObs = this.authService.login(email, password)
+
+    } else {
+      authObs = this.authService.signUp(email, password)
     }
+    authObs.subscribe(
+      resData => {
+        console.log(resData);
+        this.isLoading = false;
+      },
+      errorMessage => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+        this.isLoading = false;
+      }
+    )
 
     form.reset();
   }
