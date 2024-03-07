@@ -3,7 +3,8 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-    name: 'filter'
+    name: 'filter',
+    pure: false // Esto es para que el pipe se actualice cada vez que cambie algo en la página , Puede ser un problema de rendimiento 
 })
 export class FilterPipe {
     transform(value: any , filterString : string, propName: string ){
