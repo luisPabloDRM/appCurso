@@ -39,6 +39,11 @@ export class HeaderComponent {
     this.dataStorageService.fetchingRecipes().subscribe();
   }
 
+  onLogout(){
+    this.authService.logout()
+    alert('You are logged out!')
+  }
+
   ngOnDestoy(){
     this.userSub.unsubscribe()
   }
