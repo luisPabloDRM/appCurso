@@ -5,18 +5,20 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeService } from './services/recipe.service';
 import { RouterOutlet } from '@angular/router';
 
-
 @Component({
   selector: 'app-recipe-book',
   standalone: true,
-  imports: [CommonModule, RecipeDetailComponent, RecipeListComponent, RouterOutlet ],
+  imports: [
+    CommonModule,
+    RecipeDetailComponent,
+    RecipeListComponent,
+    RouterOutlet,
+  ],
   templateUrl: './recipe-book.component.html',
   styleUrl: './recipe-book.component.css',
-  providers: [RecipeService]
 })
 export class RecipeBookComponent {
   constructor() {}
 
-  ngOnInit(){
-  }
+  ngOnInit() {}
 }

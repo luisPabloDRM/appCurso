@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Params , Router} from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipeService } from '../services/recipe.service';
 import { Recipe } from '../models/recipe';
 import { CommonModule } from '@angular/common';
@@ -61,7 +61,7 @@ export class RecipeEditComponent {
     );
   }
 
-  OnDeleteIngredient(index : number){
+  OnDeleteIngredient(index: number) {
     (<FormArray>this.newRecipe.get('ingredients')).removeAt(index);
   }
 
