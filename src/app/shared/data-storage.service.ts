@@ -9,7 +9,7 @@ import { map, tap } from 'rxjs/operators';
 export class DataStorageService {
   constructor(
     private httpClient: HttpClient,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
   ) {}
 
   storeRecipes() {
