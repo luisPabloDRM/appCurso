@@ -30,18 +30,21 @@ export class DataStorageService {
 
   fetchingRecipes() {
     return this.httpClient
-      .get<Recipe[] | null>('https://recipeapp-828d3-default-rtdb.europe-west1.firebasedatabase.app/recipes.json')
-      .pipe(map(recipes => {
-        return recipes!.map(recipe =>{
-          return {...recipe,
-             ingredients: recipe.ingredients ? recipe.ingredients : []
-            };
-        });
-      }),
-      tap( (recipes: Recipe[]) => {
-        this.recipeService.setRecipes(recipes);
-      })
+      .get<Recipe[] | null>(
+        'https://recipeapp-828d3-default-rtdb.europe-west1.firebasedatabase.app/recipes.json'
       )
-
+      .pipe(
+        map((recipes) => {
+          return recipes!.map((recipe) => {
+            return {
+              ...recipe,
+              ingredients: recipe.ingredients ? recipe.ingredients : [],
+            };
+          });
+        }),
+        tap((recipes: Recipe[]) => {
+          this.recipeService.setRecipes(recipes);
+        })
+      );
   }
 }

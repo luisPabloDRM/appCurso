@@ -6,6 +6,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeBookComponent } from './recipe-book/recipe-book.component';
 import { RecipeDetailComponent } from './recipe-book/recipe-detail/recipe-detail.component';
 import { RecipeListComponent } from './recipe-book/recipe-list/recipe-list.component';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -22,4 +23,14 @@ import { RecipeListComponent } from './recipe-book/recipe-list/recipe-list.compo
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {}
+export class AppComponent {
+
+  constructor(
+    private authService : AuthService
+  ){}
+
+  // ngOnInit(){
+  //   this.authService.autoLogin();
+  //   console.log('Autologin Called', this.authService.autoLogin())
+  // }
+}

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
-import { error } from 'console';
 import { LoadingSpinner } from '../shared/loading-spinner/loading-spinner';
+import { AlertComponent } from '../shared/alert/alert.component';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { AuthResponseData } from './auth.service';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [FormsModule, LoadingSpinner, CommonModule],
+  imports: [FormsModule, LoadingSpinner, CommonModule, AlertComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css',
 })
@@ -56,5 +56,9 @@ export class AuthComponent {
     )
 
     form.reset();
+  }
+
+  onHandleError(){
+    this.error = null || '';
   }
 }
